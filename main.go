@@ -1,31 +1,22 @@
 package main
 
 import (
+	"fmt"
+	"html"
+	"log"
 	"net/http"
-
-	"github.com/labstack/echo/v4"
-	"github.com/labstack/echo/v4/middleware"
 )
 
 func main() {
 
-	e := echo.New()
-
-	e.Use(middleware.Logger())
-	e.Use(middleware.Recover())
-
-	e.GET("/", func(c echo.Context) error {
-		return c.HTML(http.StatusOK, "Hello, Docker! <3")
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		fmt.Fprintf(w, "Hello, %q", html.EscapeString(r.URL.Path))
 	})
 
-	e.GET("/ping", func(c echo.Context) error {
-		return c.JSON(http.StatusOK, struct{ Status string }{Status: "OK"})
+	http.HandleFunc("/hi", func(w http.ResponseWriter, r *http.Request) {
+		fmt.Fprintf(w, "Hi")
 	})
 
-	//httpPort := os.Getenv("HTTP_PORT")
-	//if httpPort == "" {
-	httpPort := "8085"
-	//}
+	log.Fatal(http.ListenAndServe(":8081", nil))
 
-	e.Logger.Fatal(e.Start(":" + httpPort))
 }
