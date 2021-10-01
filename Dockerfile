@@ -19,7 +19,8 @@ WORKDIR /app
 
 ## we run go build to compile the binary
 ## executable of our Go program
-RUN go get github.com/go-redis/redis/v7
+ADD go.mod go.sum ./
+RUN go mod download
 RUN go build -o main .
 EXPOSE 6379
 ## Our start command which kicks off
