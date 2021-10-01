@@ -20,7 +20,7 @@ WORKDIR /app
 ## we run go build to compile the binary
 ## executable of our Go program
 RUN go build -o main .
-EXPOSE 8081
+EXPOSE 6379
 ## Our start command which kicks off
 ## our newly created binary executable
 CMD ["/app/main"]
