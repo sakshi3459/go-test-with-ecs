@@ -111,6 +111,16 @@ func uploadKind(kind Kind) {
 		}
 
 	}
+
+	_, ok := client.(*redis.ClusterClient)
+
+	if ok {
+		err := client.(*redis.ClusterClient).Close()
+		if err != nil {
+			fmt.Println("redis Close error:", err)
+		}
+	}
+
 	fmt.Println("Total keys for kind - is -", kind, len(keys))
 	if len(keys) != 0 {
 		UploadS3(keys)
