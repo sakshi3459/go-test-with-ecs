@@ -96,6 +96,11 @@ func uploadKind(kind Kind) {
 	defer fmt.Println("end uploadKind")
 
 	client := RedisClient()
+	client := redis.NewClusterClient(&redis.ClusterOptions{
+		Addrs:     []string{"clustercfg.comjct12rnkm1sy.tygu6t.usw2.cache.amazonaws.com:6379"},
+		Password:  "",                                    // no password set
+		TLSConfig: &tls.Config{InsecureSkipVerify: true}, // TLS required when TransitEncryptionEnabled: true
+	})
 
 	var keys []string
 	for i := 0; i < intervalInDays; i++ {
@@ -111,16 +116,6 @@ func uploadKind(kind Kind) {
 		}
 
 	}
-
-	_, ok := client.(*redis.ClusterClient)
-
-	if ok {
-		err := client.(*redis.ClusterClient).Close()
-		if err != nil {
-			fmt.Println("redis Close error:", err)
-		}
-	}
-
 	fmt.Println("Total keys for kind - is -", kind, len(keys))
 	if len(keys) != 0 {
 		UploadS3(keys)
