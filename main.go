@@ -3,11 +3,8 @@ package main
 import (
 	"crypto/tls"
 	"fmt"
-	"os"
-	"os/signal"
 	"strings"
 	"sync"
-	"syscall"
 	"time"
 
 	"github.com/aws/aws-sdk-go/aws"
@@ -80,44 +77,17 @@ func main() {
 	fmt.Println("begin schedulehandler")
 	defer fmt.Println("end schedulehandler")
 
-	sigs := make(chan os.Signal, 1)
-	done := make(chan bool, 1)
-	//registers the channel
-	signal.Notify(sigs, syscall.SIGTERM)
-
-	go func() {
-		sig := <-sigs
-		fmt.Println("Caught SIGTERM, shutting down", sig)
-		// Finish any outstanding requests, then...
-		done <- true
-	}()
-
-	fmt.Println("Starting application")
-	// Main logic goes here
-
 	startTs := time.Now().Unix()
 
-	//uploadKind(Pool)
+	uploadKind(Pool)
 	uploadKind(Storage)
-	/* uploadKind(VolumePerf)
+	uploadKind(VolumePerf)
 	uploadKind(MpsBusyRate)
 	uploadKind(MpOwnerBusyRate)
-	uploadKind(Cache) */
+	uploadKind(Cache)
 
 	endTs := time.Now().Unix()
 	fmt.Println("Total time: ", (endTs - startTs))
-
-	fmt.Println("exiting")
-
-	/* 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-	   		fmt.Fprintf(w, "Hello, %q", html.EscapeString(r.URL.Path))
-	   	})
-
-	   	http.HandleFunc("/hi", func(w http.ResponseWriter, r *http.Request) {
-	   		fmt.Fprintf(w, "Hi")
-	   	})
-
-	   	log.Fatal(http.ListenAndServe(":8081", nil)) */
 
 }
 
@@ -125,11 +95,7 @@ func uploadKind(kind Kind) {
 	fmt.Println("begin uploadKind")
 	defer fmt.Println("end uploadKind")
 
-	client := redis.NewClusterClient(&redis.ClusterOptions{
-		Addrs:     []string{"clustercfg.comjct12rnkm1sy.tygu6t.usw2.cache.amazonaws.com:6379"},
-		Password:  "",                                    // no password set
-		TLSConfig: &tls.Config{InsecureSkipVerify: true}, // TLS required when TransitEncryptionEnabled: true
-	})
+	client := RedisClient()
 
 	var keys []string
 	for i := 0; i < intervalInDays; i++ {
@@ -192,8 +158,6 @@ func (svc service) upload(redisUpload RedisToS3Upload) {
 
 	key += ".csv"
 
-	fmt.Println("Key before upload: ", &key)
-	fmt.Println("Body before upload: ", reader)
 	_, err = uploader.Upload(&s3manager.UploadInput{
 		Bucket: aws.String("olympus-metrics-archive-dev"),
 		Key:    &key,
