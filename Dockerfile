@@ -2,6 +2,11 @@
 ## go application
 FROM golang:1.12.0-alpine3.9
 
+RUN apk add --no-cache python3 py3-pip \
+    && pip3 install --upgrade pip \
+    && pip3 install awscli \
+    && rm -rf /var/cache/apk/*
+    
 ## We create an /app directory within our
 ## image that will hold our application source
 ## files
