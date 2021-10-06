@@ -95,7 +95,6 @@ func uploadKind(kind Kind) {
 	fmt.Println("begin uploadKind")
 	defer fmt.Println("end uploadKind")
 
-	client := RedisClient()
 	client := redis.NewClusterClient(&redis.ClusterOptions{
 		Addrs:     []string{"clustercfg.comjct12rnkm1sy.tygu6t.usw2.cache.amazonaws.com:6379"},
 		Password:  "",                                    // no password set
