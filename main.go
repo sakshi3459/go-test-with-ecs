@@ -3,8 +3,11 @@ package main
 import (
 	"crypto/tls"
 	"fmt"
+	"os"
+	"os/signal"
 	"strings"
 	"sync"
+	"syscall"
 	"time"
 
 	"github.com/aws/aws-sdk-go/aws"
@@ -77,15 +80,20 @@ func main() {
 	fmt.Println("begin schedulehandler")
 	defer fmt.Println("end schedulehandler")
 
-	/* 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-	   		fmt.Fprintf(w, "Hello, %q", html.EscapeString(r.URL.Path))
-	   	})
+	sigs := make(chan os.Signal, 1)
+	done := make(chan bool, 1)
+	//registers the channel
+	signal.Notify(sigs, syscall.SIGTERM)
 
-	   	http.HandleFunc("/hi", func(w http.ResponseWriter, r *http.Request) {
-	   		fmt.Fprintf(w, "Hi")
-	   	})
+	go func() {
+		sig := <-sigs
+		fmt.Println("Caught SIGTERM, shutting down")
+		// Finish any outstanding requests, then...
+		done <- true
+	}()
 
-	   	log.Fatal(http.ListenAndServe(":8081", nil)) */
+	fmt.Println("Starting application")
+	// Main logic goes here
 
 	startTs := time.Now().Unix()
 
@@ -98,6 +106,18 @@ func main() {
 
 	endTs := time.Now().Unix()
 	fmt.Println("Total time: ", (endTs - startTs))
+
+	fmt.Println("exiting")
+
+	/* 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+	   		fmt.Fprintf(w, "Hello, %q", html.EscapeString(r.URL.Path))
+	   	})
+
+	   	http.HandleFunc("/hi", func(w http.ResponseWriter, r *http.Request) {
+	   		fmt.Fprintf(w, "Hi")
+	   	})
+
+	   	log.Fatal(http.ListenAndServe(":8081", nil)) */
 
 }
 
@@ -171,7 +191,9 @@ func (svc service) upload(redisUpload RedisToS3Upload) {
 	reader := strings.NewReader(val)
 
 	key += ".csv"
-		
+
+	fmt.Println("Key before upload: ", &key)
+	fmt.Println("Body before upload: ", reader)
 	_, err = uploader.Upload(&s3manager.UploadInput{
 		Bucket: aws.String("olympus-metrics-archive-dev"),
 		Key:    &key,
