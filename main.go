@@ -87,7 +87,7 @@ func main() {
 
 	go func() {
 		sig := <-sigs
-		fmt.Println("Caught SIGTERM, shutting down")
+		fmt.Println("Caught SIGTERM, shutting down", sig)
 		// Finish any outstanding requests, then...
 		done <- true
 	}()
