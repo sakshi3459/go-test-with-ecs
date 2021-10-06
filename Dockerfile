@@ -3,14 +3,6 @@
 FROM golang:1.12.0-alpine3.9
 
 
-RUN apt-get update && \
-    apt-get install -y curl unzip && \
-    curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-
-RUN unzip awscliv2.zip && \ 
-    ./aws/install && \
-    aws --version
-    
 ## We create an /app directory within our
 ## image that will hold our application source
 ## files
@@ -32,7 +24,7 @@ RUN apk add git
 ADD go.mod go.sum ./
 RUN go mod download
 RUN go build -o main .
-EXPOSE 6379
+## EXPOSE 6379
 ## Our start command which kicks off
 ## our newly created binary executable
 CMD ["/app/main"]
