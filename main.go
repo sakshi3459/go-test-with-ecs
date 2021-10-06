@@ -76,7 +76,14 @@ func main() {
 	   	log.Fatal(http.ListenAndServe(":8081", nil)) */
 
 	startTs := time.Now().Unix()
+	
+	uploadKind(Pool)
 	uploadKind(Storage)
+	uploadKind(VolumePerf)
+	uploadKind(MpsBusyRate)
+	uploadKind(MpOwnerBusyRate)
+	uploadKind(Cache)
+	
 	endTs := time.Now().Unix()
 	fmt.Println("Total time: ", (endTs - startTs))
 
