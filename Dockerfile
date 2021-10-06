@@ -2,10 +2,14 @@
 ## go application
 FROM golang:1.12.0-alpine3.9
 
-RUN apk add --no-cache python3 py3-pip \
-    && pip3 install --upgrade pip \
-    && pip3 install awscli \
-    && rm -rf /var/cache/apk/*
+
+RUN apt-get update && \
+    apt-get install -y curl unzip && \
+    curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+
+RUN unzip awscliv2.zip && \ 
+    ./aws/install && \
+    aws --version
     
 ## We create an /app directory within our
 ## image that will hold our application source
