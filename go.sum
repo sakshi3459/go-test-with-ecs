@@ -48,5 +48,3 @@ gopkg.in/yaml.v2 v2.2.2/go.mod h1:hI93XBmqTisBFMUTm0b8Fm+jr3Dg1NNxqwp+5A1VGuI=
 gopkg.in/yaml.v2 v2.2.4/go.mod h1:hI93XBmqTisBFMUTm0b8Fm+jr3Dg1NNxqwp+5A1VGuI=
 gopkg.in/yaml.v2 v2.2.7/go.mod h1:hI93XBmqTisBFMUTm0b8Fm+jr3Dg1NNxqwp+5A1VGuI=
 gopkg.in/yaml.v2 v2.2.8/go.mod h1:hI93XBmqTisBFMUTm0b8Fm+jr3Dg1NNxqwp+5A1VGuI=
-github.com/hitachi-olympus/sal-client v0.0.0-20210616074754-40c6d6692c0f h1:LKO96+tMLd4JOWgtJ1GIE1imyfTwj61jg5qZthOM7aQ=
-github.com/hitachi-olympus/sal-client v0.0.0-20210616074754-40c6d6692c0f/go.mod h1:xPQHxNEH+AoEQsdH5SbYZdEx9qTroEo6A18EEweeyxI=
