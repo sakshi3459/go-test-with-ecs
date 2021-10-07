@@ -18,9 +18,11 @@ WORKDIR /app
 ## Download go packages and run go build to compile the binary
 ## executable of our Go program
 RUN apk add git
+ADD /platform/service/daily-s3/*.go ./
 RUN ls /app
 ADD go.mod go.sum ./
 RUN go mod download
+
 RUN go build -o main .
 
 ## Start command which kicks off created binary executable
