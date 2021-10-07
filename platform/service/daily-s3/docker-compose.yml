@@ -5,7 +5,7 @@ services:
     build:
       # context can/may/will be different per-project setup
       context: ../
-      dockerfile: Dockerfile
+      dockerfile: ./Dockerfile
       args:
         - github_user=private_user
         - github_personal_token=private_token
