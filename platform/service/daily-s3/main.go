@@ -97,7 +97,7 @@ func uploadKind(kind Kind) {
 	defer fmt.Println("end uploadKind")
 
 	client := redis.NewClusterClient(&redis.ClusterOptions{
-		Addrs:     []string{"clustercfg.comjct12rnkm1sy.tygu6t.usw2.cache.amazonaws.com:6379"},
+		Addrs:     []string{os.Getenv("RedisAddress")},
 		Password:  "",                                    // no password set
 		TLSConfig: &tls.Config{InsecureSkipVerify: true}, // TLS required when TransitEncryptionEnabled: true
 	})
@@ -124,7 +124,7 @@ func uploadKind(kind Kind) {
 
 var RedisClient = func() redis.Cmdable {
 	client := redis.NewClusterClient(&redis.ClusterOptions{
-		Addrs:        []string{"clustercfg.comjct12rnkm1sy.tygu6t.usw2.cache.amazonaws.com:6379"},
+		Addrs:        []string{os.Getenv("RedisAddress")},
 		Password:     "",                                    // no password set
 		TLSConfig:    &tls.Config{InsecureSkipVerify: true}, // TLS required when TransitEncryptionEnabled: true
 		PoolSize:     REDIS_CONNECTION_POOL_SIZE,
@@ -162,10 +162,10 @@ func (svc service) upload(redisUpload RedisToS3Upload) {
 	reader := strings.NewReader(val)
 
 	key += ".csv"
-	fmt.Println("Bucket name:", os.Getenv("StorageBucketName"))
+	//fmt.Println("Bucket name:", os.Getenv("StorageBucketName"))
 	
 	_, err = uploader.Upload(&s3manager.UploadInput{
-		Bucket: aws.String("olympus-metrics-archive-dev"),
+		Bucket: aws.String(os.Getenv("StorageBucketName")),
 		Key:    &key,
 		Body:   reader,
 	})
