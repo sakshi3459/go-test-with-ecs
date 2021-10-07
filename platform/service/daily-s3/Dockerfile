@@ -5,27 +5,20 @@ FROM golang:1.17.0-alpine3.14
 ENV SOURCE_APP /platform/service/daily-s3/*.go
 
 ## Create an /app directory within our
-## image that will hold our application source
-## files
+## image that will hold application source files
 RUN mkdir /app
 
-## Copy everything in the root directory
-## into our /app directory
-##ADD . /app
+## Copy application into /app directory
+ADD $SOURCE_APP ./
 
-## Specify that we now wish to execute
-## any further commands inside our /app
-## directory
+## Specify working directory for docker container
 WORKDIR /app
 
 ## Download go packages and run go build to compile the binary
 ## executable of our Go program
 RUN apk add git
-ADD $SOURCE_APP ./
-RUN ls /app
 ADD go.mod go.sum ./
 RUN go mod download
-
 RUN go build -o main .
 
 ## Start command which kicks off created binary executable
