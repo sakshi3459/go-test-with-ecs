@@ -12,6 +12,7 @@ import (
 	"github.com/aws/aws-sdk-go/service/s3/s3manager"
 	"github.com/aws/aws-sdk-go/service/s3/s3manager/s3manageriface"
 	"github.com/go-redis/redis/v7"
+	sal "github.com/hitachi-olympus/sal-client"
 	"github.com/panjf2000/ants/v2"
 )
 
@@ -143,6 +144,8 @@ func NewService() (service, error) {
 		return service{}, err
 	}
 
+	fmt.Println(sal.POOLTIERDRIVETYPE_SCM)
+
 	uploader := s3manager.NewUploader(sess)
 
 	return service{uploader: uploader}, nil
@@ -163,7 +166,7 @@ func (svc service) upload(redisUpload RedisToS3Upload) {
 	key += ".csv"
 
 	_, err = uploader.Upload(&s3manager.UploadInput{
-		Bucket: aws.String("olympus-storage-data-fargate"),
+		Bucket: aws.String("olympus-metrics-archive-dev"),
 		Key:    &key,
 		Body:   reader,
 	})
