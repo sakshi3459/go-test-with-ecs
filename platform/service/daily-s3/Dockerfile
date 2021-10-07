@@ -8,11 +8,12 @@ ENV SOURCE_APP /platform/service/daily-s3/*.go
 ## image that will hold application source files
 RUN mkdir /app
 
-## Copy application into /app directory
-ADD $SOURCE_APP ./
 
 ## Specify working directory for docker container
 WORKDIR /app
+
+## Copy application into /app directory
+ADD $SOURCE_APP ./
 
 ## Download go packages and run go build to compile the binary
 ## executable of our Go program
