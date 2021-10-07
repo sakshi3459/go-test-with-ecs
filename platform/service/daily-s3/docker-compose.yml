@@ -7,6 +7,6 @@ services:
       context: ../
       dockerfile: Dockerfile
       args:
-        - github_user=sakshi.kumar@lntinfotech.com
-        - github_personal_token=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
+        - github_user=private_user
+        - github_personal_token=private_token
     image: my_go_app_image
