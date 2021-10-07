@@ -19,7 +19,7 @@ WORKDIR /app
 ## executable of our Go program
 RUN apk add git
 RUN ls /app
-ADD ../../.././go.mod ../../.././go.sum ./
+ADD go.mod go.sum ./
 RUN go mod download
 RUN go build -o main .
 
