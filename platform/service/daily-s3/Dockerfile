@@ -19,7 +19,10 @@ ADD $SOURCE_APP ./
 ## executable of our Go program
 RUN apk add git
 ADD go.mod go.sum ./
-RUN go mod download
+## RUN go mod download
+RUN go mod download github.com/aws/aws-sdk-go
+RUN go mod download github.com/go-redis/redis/v7
+RUN go mod download github.com/panjf2000/ants/v2
 RUN go build -o main .
 
 ## Start command which kicks off created binary executable
