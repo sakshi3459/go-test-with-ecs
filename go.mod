@@ -1,10 +1,9 @@
 module main
 
-go 1.16
+go 1.17
 
 require (
 	github.com/aws/aws-sdk-go v1.40.56
 	github.com/go-redis/redis/v7 v7.4.1
 	github.com/panjf2000/ants/v2 v2.4.6
-	github.com/hitachi-olympus/sal-client v0.0.0-20210616074754-40c6d6692c0f
 )
