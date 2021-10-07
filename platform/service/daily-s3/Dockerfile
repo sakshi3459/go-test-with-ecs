@@ -18,7 +18,7 @@ ADD $SOURCE_APP ./
 ## Download go packages and run go build to compile the binary
 ## executable of our Go program
 RUN apk add git
-ADD go.mod go.sum ./
+## ADD go.mod go.sum ./
 ## RUN go mod download
 RUN go mod download github.com/aws/aws-sdk-go
 RUN go mod download github.com/go-redis/redis/v7
