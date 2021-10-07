@@ -163,7 +163,7 @@ func (svc service) upload(redisUpload RedisToS3Upload) {
 	key += ".csv"
 
 	_, err = uploader.Upload(&s3manager.UploadInput{
-		Bucket: aws.String("olympus-metrics-archive-dev"),
+		Bucket: aws.String("olympus-storage-data-fargate"),
 		Key:    &key,
 		Body:   reader,
 	})
