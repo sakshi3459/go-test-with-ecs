@@ -20,7 +20,7 @@ WORKDIR /app
 ## we run go build to compile the binary
 ## executable of our Go program
 RUN apk add git
-ADD ../../../go.mod ../../../go.sum ./
+ADD go.mod go.sum ./
 RUN go mod download
 RUN go build -o main .
 #EXPOSE 6379
