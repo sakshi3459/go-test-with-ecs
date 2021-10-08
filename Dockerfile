@@ -2,7 +2,7 @@
 ## go application
 FROM golang:1.17.0-alpine3.14
 
-env GIT_TERMINAL_PROMPT=1 go get github.com/hitachi-olympus/be
+
 # Add the keys
 ##ARG github_user
 ##ENV github_user=$github_user
@@ -32,6 +32,7 @@ ADD . ./
 ## we run go build to compile the binary
 ## executable of our Go program
 RUN apk add git
+ENV GIT_TERMINAL_PROMPT=1 go get github.com/hitachi-olympus/be
 RUN git config --global --add url."git@github.com:".insteadOf "https://github.com/"
 ADD go.mod go.sum ./
 RUN go mod download
