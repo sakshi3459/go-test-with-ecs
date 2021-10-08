@@ -31,6 +31,7 @@ ADD . ./
 ## we run go build to compile the binary
 ## executable of our Go program
 RUN apk add git
+RUN git config --global --add url."git@github.com:".insteadOf "https://github.com/"
 ADD go.mod go.sum ./
 RUN go mod download
 ##RUN go mod download github.com/aws/aws-sdk-go@v1.40.56
