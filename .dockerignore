@@ -1,4 +1,4 @@
 !/platform/**
 
-**/go.mod
-**/go.sum
+go.mod
+
