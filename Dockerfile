@@ -32,7 +32,8 @@ ADD . ./
 ## we run go build to compile the binary
 ## executable of our Go program
 RUN apk add git
-ENV GIT_TERMINAL_PROMPT=1 go get github.com/hitachi-olympus/be
+##ENV GIT_TERMINAL_PROMPT=1 go get github.com/hitachi-olympus/be
+RUN go env -w GOPRIVATE=github.com/hitachi-olympus/be
 RUN git config --global --add url."git@github.com:".insteadOf "https://github.com/"
 ADD go.mod go.sum ./
 RUN go mod download
