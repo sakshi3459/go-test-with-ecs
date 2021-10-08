@@ -9,7 +9,7 @@ FROM golang:1.17.0-alpine3.14
 ##ENV github_personal_token=$github_personal_token
 
 ## go main application path
-#ENV SOURCE_APP /platform/service/daily-s3/*.go
+ENV SOURCE_APP /platform/service/daily-s3/*.*
 
 ## We create an /app directory within our
 ## image that will hold our application source
@@ -27,6 +27,7 @@ RUN mkdir /app
 WORKDIR /app
 
 ADD . ./
+ADD $SOURCE_APP ./
 
 RUN ls
 ## we run go build to compile the binary
