@@ -33,7 +33,8 @@ RUN ls
 ## executable of our Go program
 RUN apk add git
 ADD go.mod go.sum ./
-RUN go mod download
+RUN cat /platform/service/daily-s3/mod 
+RUN go /platform/service/daily-s3/mod download
 ##RUN go mod download github.com/aws/aws-sdk-go@v1.40.56
 ##RUN go mod download github.com/go-redis/redis/v7@v7.4.1
 ##RUN go mod download github.com/panjf2000/ants/v2@v2.4.6
