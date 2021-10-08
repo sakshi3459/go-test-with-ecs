@@ -33,7 +33,7 @@ RUN ls
 ## executable of our Go program
 RUN apk add git
 ## ADD go.mod go.sum ./
-RUN cd platform/service/daily-s3
+RUN cd platform
 RUN ls
 RUN cat platform/service/daily-s3/go.mod
 ## RUN go mod download -dir platform/service/daily-s3/go.mod
