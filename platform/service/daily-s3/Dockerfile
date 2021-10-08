@@ -26,7 +26,7 @@ RUN mkdir /app
 ## directory
 WORKDIR /app
 
-ADD ../ ./
+ADD . ./
 
 RUN ls
 ## we run go build to compile the binary
