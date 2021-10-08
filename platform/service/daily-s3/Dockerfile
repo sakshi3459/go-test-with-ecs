@@ -36,7 +36,7 @@ RUN apk add git
 RUN cd /app/platform
 RUN ls
 RUN cat /app/platform/service/daily-s3/main.go
-RUN cat /app/platform/service/daily-s3/go.mod
+##RUN cat /app/platform/service/daily-s3/go.mod
 
 ## RUN go mod download -dir platform/service/daily-s3/go.mod
 RUN go mod download github.com/aws/aws-sdk-go@v1.40.56
