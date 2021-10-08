@@ -15,7 +15,7 @@ import (
 	"github.com/go-redis/redis/v7"
 
 	//sal "github.com/hitachi-olympus/sal-client"
-	"github.com/hitachi-olympus/be/models"
+	//"github.com/hitachi-olympus/be/models"
 	"github.com/panjf2000/ants/v2"
 )
 
@@ -83,7 +83,7 @@ func main() {
 
 	startTs := time.Now().Unix()
 
-	fmt.Println(models.Pool)
+	//fmt.Println(models.Pool)
 
 	uploadKind(Pool)
 	uploadKind(Storage)
