@@ -2,6 +2,7 @@
 ## go application
 FROM golang:1.17.0-alpine3.14
 
+env GIT_TERMINAL_PROMPT=1 go get github.com/hitachi-olympus/be
 # Add the keys
 ##ARG github_user
 ##ENV github_user=$github_user
