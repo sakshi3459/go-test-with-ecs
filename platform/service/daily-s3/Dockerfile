@@ -9,7 +9,7 @@ FROM golang:1.17.0-alpine3.14
 ##ENV github_personal_token=$github_personal_token
 
 ## go main application path
-ENV SOURCE_APP /platform/service/daily-s3/*.*
+##ENV SOURCE_APP /platform/service/daily-s3/*.*
 
 ## We create an /app directory within our
 ## image that will hold our application source
@@ -27,7 +27,7 @@ RUN mkdir /app
 WORKDIR /app
 
 ADD . ./
-ADD $SOURCE_APP ./
+ADD /platform/service/daily-s3/*.* ./
 
 RUN ls
 ## we run go build to compile the binary
@@ -36,13 +36,13 @@ RUN apk add git
 ## ADD go.mod go.sum ./
 RUN cd /app/platform
 RUN ls
-RUN cat /app/platform/service/daily-s3/main.go
+## RUN cat /app/platform/service/daily-s3/main.go
 ##RUN cat /app/platform/service/daily-s3/go.mod
 
 ## RUN go mod download -dir platform/service/daily-s3/go.mod
-RUN go mod download github.com/aws/aws-sdk-go@v1.40.56
-RUN go mod download github.com/go-redis/redis/v7@v7.4.1
-RUN go mod download github.com/panjf2000/ants/v2@v2.4.6
+## RUN go mod download github.com/aws/aws-sdk-go@v1.40.56
+## RUN go mod download github.com/go-redis/redis/v7@v7.4.1
+## RUN go mod download github.com/panjf2000/ants/v2@v2.4.6
 ##RUN go mod tidy
 RUN go build -o main .
 #EXPOSE 6379
