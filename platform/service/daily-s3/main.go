@@ -4,7 +4,8 @@ import (
 	"fmt"
 	"time"
 	
-	"./lib"
+	//"./lib"
+	"github.com/sakshi3459/go-test-with-ecs/platform/service/daily-s3/lib"
 )
 
 func main() {
