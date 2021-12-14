@@ -1,4 +1,4 @@
-module main
+module github.com/sakshi3459/go-test-with-ecs
 
 go 1.16
 
