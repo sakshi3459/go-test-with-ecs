@@ -3,6 +3,8 @@ package main
 import (
 	"fmt"
 	"time"
+	
+	"./lib"
 )
 
 func main() {
@@ -14,6 +16,8 @@ func main() {
 	for i := 0; i < 20; i++ {
 		fmt.Println("Value of i:", i)
 	}
+	
+	lib.Test()
 
 	endTs := time.Now().Unix()
 	fmt.Println("Total time: ", (endTs - startTs))
