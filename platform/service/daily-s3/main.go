@@ -21,9 +21,9 @@ func main() {
 	
 	//lib.Test()
 	
-	err := errors.New("error in sample appln")
-	fmt.Println("ERROR: ", err)
-	return
+	//err := errors.New("error in sample appln")
+	//fmt.Println("ERROR: ", err)
+	//return
 
 	endTs := time.Now().Unix()
 	fmt.Println("Total time: ", (endTs - startTs))
