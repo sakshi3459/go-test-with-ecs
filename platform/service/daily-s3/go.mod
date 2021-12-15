@@ -1,4 +1,4 @@
-module github.com/sakshi3459/go-test-with-ecs/platform/service/daily-s3
+module main
 
 go 1.16
 
