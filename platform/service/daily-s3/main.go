@@ -23,6 +23,7 @@ func main() {
 	
 	err := errors.New("error in sample appln")
 	fmt.Println("err: ", err)
+	return
 
 	endTs := time.Now().Unix()
 	fmt.Println("Total time: ", (endTs - startTs))
