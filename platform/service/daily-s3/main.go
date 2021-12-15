@@ -22,7 +22,7 @@ func main() {
 	//lib.Test()
 	
 	err := errors.New("error in sample appln")
-	fmt.Println("err: ", err)
+	fmt.Println("ERROR: ", err)
 	return
 
 	endTs := time.Now().Unix()
