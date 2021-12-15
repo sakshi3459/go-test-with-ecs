@@ -21,8 +21,8 @@ func main() {
 	
 	//lib.Test()
 	
-	//err := errors.New("error in sample appln")
-	//fmt.Println("ERROR: ", err)
+	err := errors.New("error in sample appln")
+	fmt.Println("Failure: ", err)
 	//return
 
 	endTs := time.Now().Unix()
