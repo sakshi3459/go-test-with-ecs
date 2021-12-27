@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 	"time"
-	"errors"
+	//"errors"
 	
 	//"./lib"
 	//"github.com/sakshi3459/go-test-with-ecs/platform/service/daily-s3/lib"
@@ -21,8 +21,8 @@ func main() {
 	
 	//lib.Test()
 	
-	err := errors.New("error in sample appln")
-	fmt.Println("Failure: ", err)
+	//err := errors.New("error in sample appln")
+	//fmt.Println("Failure: ", err)
 	//return
 
 	endTs := time.Now().Unix()
